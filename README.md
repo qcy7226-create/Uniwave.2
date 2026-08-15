@@ -273,12 +273,6 @@ UniWave-2/
 📝 Citation
 If you use UniWave‑2 in your research, please cite:
 
-bibtex
-@article{Zhang2026UniWave2,
-  title  = {UniWave-2: A Hybrid Model for Nucleic Acid Waveform Feature Extraction Enhanced by Fourier and Wavelet Transforms},
-  author = {Zhang, Hao and Qi, Yujun and Feng, Yulan and Wang, Lili},
-  year   = {2026}
-}
 📧 Contact
 For questions, bug reports, or suggestions, please open a GitHub Issue.
 
