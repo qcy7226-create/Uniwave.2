@@ -232,9 +232,35 @@ bibtex
 📧 Contact
 For questions, bug reports, or suggestions, please open a GitHub Issue.
 
-Corresponding Author:
-Prof. Lili Wang
-College of Physics and Electronic Engineering, Northwest Normal University
-Email: wanglili@nwnu.edu.cn
+We established an efficiency benchmarking protocol for UniWave-2 to comprehensively evaluate its deployment feasibility in resource-constrained settings by measuring practical efficiency metrics, including inference time, GPU memory usage, FLOPs, and sequence-length scalability. The evaluation consisted of three steps: (1) four model variants were defined—the full model, the model without GRU, the model without WaveEncoder, and the model without dilated convolutions—and their parameter counts, FLOPs, inference times, and peak GPU memory usage were measured; (2) the measured efficiency of UniWave-2 was compared with the efficiency metrics of large-scale models reported in the DNABERT-2 study; (3) the scalability of the full model was evaluated across four sequence lengths: 500, 1,000, 2,000, and 5,000 bp. For all configurations, 20 warm-up runs were performed before 100 inference runs, with the mean values reported. The experiments used a SARS-CoV-2 variant classification dataset comprising nine variants (Alpha, Beta, Gamma, Delta, BA.1, BA.2, BA.4, BA.5, and XBB.1.5), with sequences of 1,000 bp and nine classes. This dataset was derived from the DNABERT-2 benchmark, and the experimental setup was identical to that reported in Table 3 of the original study. The complete experimental results are presented in the table below.
+Table.1. Efficiency Benchmarking of UniWave-2
+Variant	Params (M)	FLOPs (G)	Inference Time (ms)	Peak GPU Memory (MB)
+Full	0.327	0.319	4.43	81.56
+w/o GRU	0.186	0.192	2.78	46.13
+w/o WaveEncoder	0.265	0.195	3.86	71.30
+w/o Dilated Conv	0.327	0.319	4.31	82.61
+Note: Full = complete UniWave‑2 model; w/o = without the indicated component.
+Table.2. Efficiency Gap Between UniWave-2 and Large Models such as DNABERT-2
+Model	Params (M)	Rel. FLOPs	Inference Time (ms)	Peak GPU Memory (MB)
+DNABERT (3-mer)	86	3.27	~15.0	~4,800
+DNABERT (4-mer)	86	3.26	~15.0	~4,800
+DNABERT (5-mer)	87	3.26	~15.0	~4,800
+DNABERT (6-mer)	89	3.25	~15.0	~4,800
+NT-500M-human	480	3.19	~30.0	~12,000
+NT-500M-1000g	480	3.19	~30.0	~12,000
+NT-2500M-1000g	2537	19.44	~45.0	~20,000
+NT-2500M-multi	2537	19.44	~45.0	~20,000
+DNABERT-2	117	1.00	~15.0	~4,800
+DNABERT-2♦	117	1.00	~15.0	~4,800
+UniWave‑2 (ours)	0.327	0.32	4.43	81.56
+Note: Relative FLOPs are normalized to DNABERT-2 (1.00×), with larger values indicating greater computational cost. The values were calculated based on Table 2 of the DNABERT-2 paper. Inference time and GPU memory usage for the pretrained models were estimated from their reported FLOPs, whereas the corresponding values for UniWave-2 were measured directly on an NVIDIA RTX 3090.
+Table.3. Full Sequence-Length Scalability
+Sequence Length (bp)	Inference Time (ms)	Peak GPU Memory (MB)	Time Scaling 	Memory Scaling 
+500	3.74	51.33	1.00×	1.00×
+1000	3.97	62.50	1.06×	1.22×
+2000	4.43	81.56	1.18×	1.59×
+5000	5.16	135.19	1.38×	2.63×
+Note: “Time Scaling” and “Memory Scaling” denote the fold increases in inference time and peak GPU memory usage, respectively, relative to those for 500-bp sequences.
+
 
 ⭐ If you find this work useful, please consider giving a star to the repository!
